@@ -1,194 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>BudgetPlanners.com – Adventure for Less</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>BudgetPlanners.com – Adventure for Less</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #f3f6f4;
-      color: #2e2e2e;
-    }
+body{
+  font-family:'Montserrat',sans-serif;
+  background:#f3f6f4;
+  color:#2e2e2e;
+}
 
-    header {
-      background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover;
-      padding: 100px 20px;
-      text-align: center;
-      color: white;
-      position: relative;
-    }
+/* HEADER */
+header{
+  background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover;
+  padding:100px 20px;
+  text-align:center;
+  color:white;
+  position:relative;
+}
+header::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.6);
+}
+header *{position:relative;z-index:2}
+header h1{font-size:3.2rem;font-weight:700}
+header p{margin-top:15px;font-size:1.3rem}
 
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-    }
+/* SECTIONS */
+section{
+  padding:60px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+h2{
+  text-align:center;
+  margin-bottom:40px;
+  font-size:2.2rem;
+  color:#1b5e20;
+}
 
-    header * {
-      position: relative;
-      z-index: 2;
-    }
+/* TRIPS */
+.trips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+.trip{
+  background:white;
+  border-radius:15px;
+  padding:25px;
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
+  border-left:6px solid #43a047;
+}
+.trip h3{margin-bottom:10px;color:#2e7d32}
+.price{font-weight:700;color:#1b5e20;margin-top:10px}
 
-    header h1 {
-      font-size: 3.2rem;
-      font-weight: 700;
-    }
+/* FORM */
+.booking-form input,
+.booking-form select,
+.booking-form button{
+  width:100%;
+  padding:14px;
+  margin-bottom:18px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+.booking-form button{
+  background:#43a047;
+  color:white;
+  font-size:1rem;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+}
+.booking-form button:hover{background:#2e7d32}
 
-    header p {
-      margin-top: 15px;
-      font-size: 1.3rem;
-    }
+/* FOOTER */
+footer{
+  background:#1b5e20;
+  color:white;
+  text-align:center;
+  padding:35px 20px;
+}
 
-    section {
-      padding: 60px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
+/* CHAT TOGGLE BUTTON */
+.chat-toggle{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  background:#43a047;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.6rem;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  z-index:999;
+}
 
-    h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2.2rem;
-      color: #1b5e20;
-    }
+/* CHATBOX */
+.chatbot{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  width:310px;
+  background:white;
+  border-radius:15px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  overflow:hidden;
+  font-size:.9rem;
+  transform:scale(0);
+  transform-origin:bottom right;
+  transition:transform .3s ease;
+  z-index:1000;
+}
+.chatbot.active{transform:scale(1)}
 
-    .trips {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .trip {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-      border-left: 6px solid #43a047;
-    }
-
-    .trip h3 {
-      margin-bottom: 10px;
-      color: #2e7d32;
-    }
-
-    .price {
-      font-weight: 700;
-      color: #1b5e20;
-      margin-top: 10px;
-    }
-
-    .booking-form input,
-    .booking-form select,
-    .booking-form button {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 18px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .booking-form button {
-      background: #43a047;
-      color: white;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-    }
-
-    .booking-form button:hover {
-      background: #2e7d32;
-    }
-
-    footer {
-      background: #1b5e20;
-      color: white;
-      text-align: center;
-      padding: 35px 20px;
-    }
-
-    /* Chatbot */
-    .chatbot {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 310px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-      overflow: hidden;
-      font-size: 0.9rem;
-    }
-
-    .chat-header {
-      background: #43a047;
-      color: white;
-      padding: 15px;
-      font-weight: 700;
-    }
-
-    .chat-body {
-      height: 260px;
-      padding: 12px;
-      overflow-y: auto;
-    }
-
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #ddd;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      outline: none;
-    }
-
-    .chat-input button {
-      background: #43a047;
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      cursor: pointer;
-    }
-
-    .bot { color: #2e7d32; margin-bottom: 8px; }
-    .user { text-align: right; margin-bottom: 8px; font-weight: 500; }
-  </style>
+.chat-header{
+  background:#43a047;
+  color:white;
+  padding:15px;
+  font-weight:700;
+}
+.chat-body{
+  height:260px;
+  padding:12px;
+  overflow-y:auto;
+}
+.chat-input{
+  display:flex;
+  border-top:1px solid #ddd;
+}
+.chat-input input{
+  flex:1;
+  padding:12px;
+  border:none;
+  outline:none;
+}
+.chat-input button{
+  background:#43a047;
+  color:white;
+  border:none;
+  padding:12px 16px;
+  cursor:pointer;
+}
+.bot{color:#2e7d32;margin-bottom:8px}
+.user{text-align:right;margin-bottom:8px;font-weight:500}
+</style>
 </head>
 
 <body>
 
 <header>
   <h1>BudgetPlanners.com</h1>
-  <p>Big Adventures. Small Budgets.</p>
+  <p>Big Adventures. Small Budgets. 🌍</p>
 </header>
 
 <section>
   <h2>Top Budget Adventures</h2>
   <div class="trips">
     <div class="trip">
-      <h3>Spain – Asturias</h3>
-      <p>Green mountains, coastal hikes & authentic villages.</p>
-      <div class="price">From 100 &#8364</div>
+      <h3>🇪🇸 Spain – Asturias</h3>
+      <p>Green mountains, coastal hikes & villages.</p>
+      <div class="price">From €599</div>
     </div>
     <div class="trip">
-      <h3>Switzerland</h3>
-      <p>Alpine trails, scenic trains & budget hostels.</p>
-      <div class="price">From 799 &#8364</div>
+      <h3>🇨🇭 Switzerland</h3>
+      <p>Alpine trails & scenic trains.</p>
+      <div class="price">From €749</div>
     </div>
     <div class="trip">
-      <h3>Iceland</h3>
-      <p>Glaciers, volcanoes & northern lights adventures.</p>
-      <div class="price">From 849 &#8364</div>
+      <h3>🇮🇸 Iceland</h3>
+      <p>Glaciers, volcanoes & aurora.</p>
+      <div class="price">From €799</div>
     </div>
   </div>
 </section>
@@ -203,34 +199,31 @@
       <option>Spain – Asturias</option>
       <option>Switzerland</option>
       <option>Iceland</option>
-       <option>Other Destination</option>
+      <option>Other Destinations</option>
     </select>
     <input type="date" required>
     <button type="submit">Start Planning</button>
   </form>
 </section>
 
-<section>
-  <h2>Contact Budget Planners</h2>
-  <p style="text-align:center;">
-   <br> support@budgetplanners.com <br>
-   <br> +34 604294900<br>
-   <br> BudgetPlanners.com <br>
-  </p>
-</section>
-
 <footer>
   <p>© 2026 BudgetPlanners.com – Adventure Made Affordable</p>
-  <p style="margin-top:8px; font-size:0.9rem; opacity:0.85;">
+  <p style="margin-top:8px;font-size:.9rem;opacity:.85">
     Founded by Ajil Jayalal
   </p>
 </footer>
 
-<!-- Chatbot -->
-<div class="chatbot">
-  <div class="chat-header">Budget Travel Bot</div>
+<!-- CHAT BUTTON -->
+<div class="chat-toggle" onclick="toggleChat()">💬</div>
+
+<!-- CHATBOT -->
+<div class="chatbot" id="chatbot">
+  <div class="chat-header">
+    Budget Travel Bot 💬
+    <span onclick="toggleChat()" style="float:right;cursor:pointer">✖</span>
+  </div>
   <div class="chat-body" id="chatBody">
-    <div class="bot">Hey adventurer!  Need help planning a budget trip?</div>
+    <div class="bot">Hey adventurer! 🏕 Need help planning a budget trip?</div>
   </div>
   <div class="chat-input">
     <input type="text" id="chatInput" placeholder="Ask about prices, trips...">
@@ -239,28 +232,31 @@
 </div>
 
 <script>
-  function sendMessage() {
-    const input = document.getElementById("chatInput");
-    const chatBody = document.getElementById("chatBody");
+function toggleChat(){
+  document.getElementById("chatbot").classList.toggle("active");
+}
 
-    if (!input.value.trim()) return;
+function sendMessage(){
+  const input=document.getElementById("chatInput");
+  const chatBody=document.getElementById("chatBody");
+  if(!input.value.trim())return;
 
-    chatBody.innerHTML += <div class="user">${input.value}</div>;
+  chatBody.innerHTML+=`<div class="user">${input.value}</div>`;
 
-    let reply = "I can help you find the cheapest adventure!";
-    const msg = input.value.toLowerCase();
+  let reply="I can help you find the cheapest adventure!";
+  const msg=input.value.toLowerCase();
 
-    if (msg.includes("price") || msg.includes("cheap"))
-      reply = "Spain – Asturias is our best budget trip ??";
-    else if (msg.includes("book"))
-      reply = "Use the booking form above to get started ??";
-    else if (msg.includes("best"))
-      reply = "Asturias and Iceland are traveler favorites ????";
+  if(msg.includes("price")||msg.includes("cheap"))
+    reply="Spain – Asturias is our best budget trip 💸";
+  else if(msg.includes("book"))
+    reply="Use the booking form above to get started 🚀";
+  else if(msg.includes("best"))
+    reply="Asturias and Iceland are traveler favorites 🌄❄️";
 
-    chatBody.innerHTML += <div class="bot">${reply}</div>;
-    input.value = "";
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
+  chatBody.innerHTML+=`<div class="bot">${reply}</div>`;
+  input.value="";
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
 </script>
 
 </body>
