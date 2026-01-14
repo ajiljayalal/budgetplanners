@@ -14,7 +14,335 @@ body{
   transition: background 1s ease;
   background:linear-gradient(rgba(232,245,233,0.92), rgba(227,242,253,0.92)), 
     url('https://images.unsplash.com/photo-1616627984350-cd1f5e06e4e7?auto=format&fit=crop&w=1800&q=80');
-  background-size:cover;
+  background-size:cover;<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BudgetPlanners – Adventure for Less</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Montserrat',sans-serif;
+  color:#2e2e2e;
+  margin:0;
+  transition: background 1s ease;
+  background: linear-gradient(rgba(232,245,233,0.92), rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2019/09/25/09/20/asturias-4499408_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: contrast(1.15) saturate(1.3);
+}
+header{
+  position: relative;
+  overflow: hidden;
+  padding: 130px 20px;
+  text-align: center;
+  color: white;
+}
+header h1{
+  font-size: 3.5rem;
+  font-weight:700;
+  text-shadow: 0 6px 20px rgba(0,0,0,.5);
+}
+header p{
+  margin-top:18px;
+  font-size:1.4rem;
+  color:#e8f5e9;
+  text-shadow:0 3px 8px rgba(0,0,0,.4);
+}
+#hiker{
+  position:absolute;
+  bottom:0;
+  right:0;
+  width:100px;
+  height:120px;
+  z-index:2;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Hiker_emoji.png/64px-Hiker_emoji.png') no-repeat center/contain;
+}
+.cloud{
+  position:absolute;
+  top:20px;
+  width:150px;
+  height:80px;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Cloud_icon.svg/1200px-Cloud_icon.svg.png') no-repeat center/contain;
+  opacity:.7;
+  z-index:0;
+}
+.cloud:nth-child(1){top:30px;left:-200px;animation:cloud1 60s linear infinite}
+.cloud:nth-child(2){top:80px;left:-250px;width:200px;height:100px;animation:cloud2 80s linear infinite}
+.cloud:nth-child(3){top:50px;left:-150px;width:180px;height:90px;animation:cloud3 100s linear infinite}
+@keyframes cloud1{0%{left:-200px}100%{left:120%}}
+@keyframes cloud2{0%{left:-250px}100%{left:130%}}
+@keyframes cloud3{0%{left:-150px}100%{left:125%}}
+.bird{
+  position:absolute;
+  width:60px;
+  height:40px;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/5/54/Twitter_bird_logo.svg') no-repeat center/contain;
+  z-index:1;
+  top:50px;
+  left:-100px;
+  animation:fly 20s linear infinite;
+}
+.bird:nth-child(1){top:100px;animation-duration:18s}
+.bird:nth-child(2){top:60px;animation-duration:22s;left:-200px}
+@keyframes fly{0%{left:-100px}100%{left:120%}}
+section{
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+h2{
+  text-align:center;
+  margin-bottom:45px;
+  font-size:2.4rem;
+  color:#1b5e20;
+}
+h2::after{
+  content:"";
+  width:90px;
+  height:4px;
+  background:linear-gradient(90deg,#43a047,#fbc02d);
+  display:block;
+  margin:14px auto 0;
+  border-radius:4px;
+}
+.trips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.trip{
+  background:linear-gradient(180deg,#ffffff,#f1f8e9);
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 18px 35px rgba(0,0,0,.12);
+  border-left:6px solid #43a047;
+  position:relative;
+  transition:.4s ease;
+}
+.trip::before{
+  content:"⛰";
+  position:absolute;
+  top:12px;
+  right:16px;
+  font-size:1.6rem;
+  opacity:.15;
+}
+.trip:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 30px 55px rgba(0,0,0,.18);
+}
+.trip h3{margin-bottom:12px;color:#2e7d32}
+.price{font-weight:700;font-size:1.1rem;color:#1b5e20;margin-top:12px}
+.booking-form{
+  background:linear-gradient(180deg,#ffffff,#e3f2fd);
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+.booking-form input,.booking-form select,.booking-form button{
+  width:100%;
+  padding:15px;
+  margin-bottom:20px;
+  border-radius:10px;
+  border:1px solid #c8e6c9;
+}
+.booking-form input:focus,.booking-form select:focus{
+  outline:none;
+  border-color:#43a047;
+}
+.booking-form button{
+  background:linear-gradient(90deg,#43a047,#2e7d32);
+  color:white;
+  font-size:1.05rem;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  position:relative;
+}
+.booking-form button::after{
+  content:"🥾";
+  position:absolute;
+  right:20px;
+  opacity:0;
+  transition:.3s ease;
+}
+.booking-form button:hover::after{
+  opacity:1;
+  right:15px;
+}
+footer{
+  background:linear-gradient(90deg,#1b5e20,#2e7d32);
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+.chat-toggle{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:58px;
+  height:58px;
+  background:linear-gradient(135deg,#43a047,#4fc3f7);
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.7rem;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  animation:float 3s ease-in-out infinite;
+  z-index:999;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.chatbot{
+  position:fixed;
+  bottom:95px;
+  right:20px;
+  width:320px;
+  background:linear-gradient(180deg,#ffffff,#e8f5e9);
+  border-radius:18px;
+  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  overflow:hidden;
+  font-size:.9rem;
+  transform:scale(0);
+  transform-origin:bottom right;
+  transition:.3s ease;
+  z-index:1000;
+}
+.chatbot.active{transform:scale(1)}
+.chat-header{
+  background:linear-gradient(90deg,#43a047,#4fc3f7);
+  color:white;
+  padding:16px;
+  font-weight:700;
+}
+.chat-body{height:260px;padding:14px;overflow-y:auto}
+.chat-input{display:flex;border-top:1px solid #c8e6c9}
+.chat-input input{flex:1;padding:13px;border:none;outline:none}
+.chat-input button{background:#43a047;color:white;border:none;padding:13px 18px;cursor:pointer}
+.bot{color:#2e7d32;margin-bottom:8px}
+.user{text-align:right;margin-bottom:8px;font-weight:500}
+@media(max-width:768px){header{padding:90px 15px}header h1{font-size:2.2rem}header p{font-size:1rem}h2{font-size:1.8rem}}
+@media(max-width:600px){.trips{grid-template-columns:1fr;gap:20px}}
+@media(max-width:480px){.booking-form{padding:20px}.chatbot{width:90%;right:5%}.chat-toggle{width:50px;height:50px;font-size:1.5rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>BudgetPlanners</h1>
+  <p>Big Adventures. Small Budgets. 🌍</p>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="bird"></div>
+  <div class="bird"></div>
+  <div id="hiker"></div>
+</header>
+
+<section style="text-align:center">
+  <h2>“The best paths are the ones less traveled.” 🌲</h2>
+</section>
+
+<section>
+  <h2>Top Budget Adventures</h2>
+  <div class="trips">
+    <div class="trip">
+      <h3>🇪🇸 Spain – Asturias</h3>
+      <p>Green mountains, coastal hikes & villages.</p>
+      <div class="price">From €599</div>
+    </div>
+    <div class="trip">
+      <h3>🇨🇭 Switzerland</h3>
+      <p>Alpine trails & scenic trains.</p>
+      <div class="price">From €749</div>
+    </div>
+    <div class="trip">
+      <h3>🇮🇸 Iceland</h3>
+      <p>Glaciers, volcanoes & northern lights.</p>
+      <div class="price">From €799</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Plan Your Hike</h2>
+  <form class="booking-form">
+    <input type="text" placeholder="Full Name" required>
+    <input type="email" placeholder="Email Address" required>
+    <select required>
+      <option value="">Choose Adventure</option>
+      <option>Spain – Asturias</option>
+      <option>Switzerland</option>
+      <option>Iceland</option>
+    </select>
+    <input type="date" required>
+    <button type="submit">Start the Journey</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 BudgetPlanners – Adventure Made Affordable</p>
+  <p style="margin-top:8px;font-size:.9rem;opacity:.85">Founded by Ajil Jayalal</p>
+</footer>
+
+<div class="chat-toggle" onclick="toggleChat()">💬</div>
+<div class="chatbot" id="chatbot">
+  <div class="chat-header">
+    Trail Guide Bot 🌲
+    <span onclick="toggleChat()" style="float:right;cursor:pointer">✖</span>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="bot">Hey hiker! 🥾 Looking for a budget-friendly trail?</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ask about trips...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+function toggleChat(){document.getElementById("chatbot").classList.toggle("active")}
+function sendMessage(){
+  const input=document.getElementById("chatInput");
+  const chatBody=document.getElementById("chatBody");
+  if(!input.value.trim())return;
+  chatBody.innerHTML+=`<div class="user">${input.value}</div>`;
+  let reply="I can help you find the perfect hiking adventure!";
+  const msg=input.value.toLowerCase();
+  if(msg.includes("cheap")||msg.includes("price"))
+    reply="Asturias is our most budget-friendly hike 🌿";
+  else if(msg.includes("best"))
+    reply="Asturias and Iceland are top nature favorites ⛰";
+  else if(msg.includes("book"))
+    reply="Use the form above to start your journey 🥾";
+  chatBody.innerHTML+=`<div class="bot">${reply}</div>`;
+  input.value="";
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
+
+// Change background on scroll for different landscapes
+window.addEventListener('scroll',()=>{
+  const scroll = window.scrollY;
+  const body = document.body;
+  if(scroll < 400){
+    body.style.backgroundImage = "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)),url('https://cdn.pixabay.com/photo/2019/09/25/09/20/asturias-4499408_1280.jpg')";
+  } else if(scroll < 900){
+    body.style.backgroundImage = "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)),url('https://cdn.pixabay.com/photo/2024/05/07/11/01/forest-7179561_1280.jpg')";
+  } else {
+    body.style.backgroundImage = "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)),url('https://cdn.pixabay.com/photo/2020/11/16/02/26/spain-5751129_1280.jpg')";
+  }
+});
+</script>
+
+</body>
+</html>
+
   background-position:center;
   background-attachment:fixed;
   filter: contrast(1.15) saturate(1.3);
