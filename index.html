@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <title>BudgetPlanners – Adventure for Less</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -24,22 +22,11 @@ body{
 
 /* HEADER */
 header{
-  background:
-    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-    url('https://images.unsplash.com/photo-1561484934-4c62798c511f?auto=format&fit=crop&w=1600&q=80') center/cover;
+  position:relative;
+  overflow:hidden;
   padding:130px 20px;
   text-align:center;
   color:white;
-  position:relative;
-  overflow:hidden;
-}
-header::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url('https://i.ibb.co/1vTjFHQ/cartoon-hiker.png') no-repeat bottom right;
-  background-size:150px;
-  pointer-events:none;
 }
 header h1{
   font-size:3.5rem;
@@ -51,15 +38,18 @@ header p{
   font-size:1.4rem;
   color:#e8f5e9;
   text-shadow:0 3px 8px rgba(0,0,0,.4);
-} 
-/* HIKER ANIMATION */
+}
+
+/* HIKER WALKING ANIMATION */
 #hiker{
   position:absolute;
   bottom:0;
   right:0;
-  width:140px;
-  transition: transform 0.1s linear;
+  width:120px;
   z-index:1;
+  background: url('https://i.ibb.co/fFz2yT6/hiker-sprite.png') 0 0 no-repeat; 
+  background-size: cover;
+  height:140px;
 }
 
 /* SECTIONS */
@@ -82,17 +72,6 @@ h2::after{
   display:block;
   margin:14px auto 0;
   border-radius:4px;
-}
-
-/* SCROLL REVEAL */
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:.8s ease;
-}
-.reveal.active{
-  opacity:1;
-  transform:translateY(0);
 }
 
 /* TRIPS */
@@ -269,13 +248,14 @@ footer{
 <header>
   <h1>BudgetPlanners</h1>
   <p>Big Adventures. Small Budgets. 🌍</p>
+  <div id="hiker"></div>
 </header>
 
-<section class="reveal" style="text-align:center">
+<section style="text-align:center">
   <h2>“The best paths are the ones less traveled.” 🌲</h2>
 </section>
 
-<section class="reveal">
+<section>
   <h2>Top Budget Adventures</h2>
   <div class="trips">
     <div class="trip">
@@ -296,7 +276,7 @@ footer{
   </div>
 </section>
 
-<section class="reveal">
+<section>
   <h2>Plan Your Hike</h2>
   <form class="booking-form">
     <input type="text" placeholder="Full Name" required>
@@ -353,27 +333,23 @@ function sendMessage(){
   chatBody.scrollTop=chatBody.scrollHeight;
 }
 
-/* Scroll reveal */
-const reveals=document.querySelectorAll(".reveal");
-window.addEventListener("scroll",()=>{
-  reveals.forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight-100){
-      el.classList.add("active");
-    }
-  });
-});
-
-/* Dynamic scroll background */
+/* HIKER WALK ANIMATION */
+const hiker=document.getElementById('hiker');
+const totalFrames=6; // number of frames in sprite
+let frame=0;
 window.addEventListener('scroll',()=>{
-  const scroll = window.scrollY;
-  const body = document.body;
-  if(scroll<400){
-    body.style.backgroundImage="linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)),url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1800&q=80')";
-  }else if(scroll<900){
-    body.style.backgroundImage="linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)),url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80')";
-  }else{
-    body.style.backgroundImage="linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80')";
-  }
+  const scrollY=window.scrollY;
+  const maxScroll=document.body.scrollHeight-window.innerHeight;
+  const percent=scrollY/maxScroll;
+
+  // Diagonal movement
+  const x=percent*-window.innerWidth*0.4;
+  const y=percent*-120;
+  hiker.style.transform=`translate(${x}px, ${y}px)`;
+
+  // Change frame to simulate walking
+  frame=Math.floor((percent*totalFrames*10)%totalFrames);
+  hiker.style.backgroundPosition=`-${frame*120}px 0`;
 });
 </script>
 
