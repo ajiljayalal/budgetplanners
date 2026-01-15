@@ -648,7 +648,7 @@
         <article class="trip" aria-label="Spain Asturias budget trip">
           <h3>🇪🇸 Spain – Asturias</h3>
           <p>Green mountains, coastal hikes, fishing villages, and misty valleys that feel untouched.</p>
-          <div class="price">From €599</div>
+          <div class="price">From €99</div>
           <div class="badge"><span></span> Most budget-friendly</div>
         </article>
 
@@ -662,7 +662,7 @@
         <article class="trip" aria-label="Iceland budget trip">
           <h3>🇮🇸 Iceland</h3>
           <p>Glaciers, volcanoes, waterfalls, and northern lights over quiet, wild landscapes.</p>
-          <div class="price">From €799</div>
+          <div class="price">From €949</div>
           <div class="badge"><span></span> Northern lights favorite</div>
         </article>
       </div>
@@ -682,7 +682,7 @@
           </p>
         </div>
 
-        <form class="booking-form" aria-label="Hiking trip booking form">
+        <form class="booking-form" aria-label="Hiking trip booking form" onsubmit="sendToWhatsApp(event)">
           <h3>Start your next trail</h3>
           <p>Share a few details and we’ll send you a curated budget plan within 24 hours.</p>
 
@@ -805,6 +805,29 @@
         sendMessage();
       }
     });
+function sendToWhatsApp(event){
+  event.preventDefault();
+
+  // Get form values
+  const name = document.querySelector('.booking-form input[type="text"]').value;
+  const email = document.querySelector('.booking-form input[type="email"]').value;
+  const trip = document.querySelector('.booking-form select').value;
+  const date = document.querySelector('.booking-form input[type="date"]').value;
+
+  // Your WhatsApp number (international format, no +)
+  const phone = "+34604294900"; // ← replace with your number
+
+  // Build message
+  const message =
+    `New Booking Request:%0A` +
+    `Name: ${name}%0A` +
+    `Email: ${email}%0A` +
+    `Trip: ${trip}%0A` +
+    `Date: ${date}`;
+
+  // Redirect to WhatsApp
+  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+}
 
     window.addEventListener('scroll', () => {
       const scroll = window.scrollY;
