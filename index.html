@@ -809,17 +809,16 @@
     window.addEventListener('scroll', () => {
       const scroll = window.scrollY;
       const body = document.body;
-
-      if(scroll < 400){
-        body.style.backgroundImage =
-          "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2019/09/25/09/20/asturias-4499408_1280.jpg')";
-      } else if(scroll < 900){
-        body.style.backgroundImage =
-          "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2024/05/07/11/01/forest-7179561_1280.jpg')";
-      } else {
-        body.style.backgroundImage =
-          "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2020/11/16/02/26/spain-5751129_1280.jpg')";
-      }
+if(scroll < 400){
+  body.style.backgroundImage =
+    "linear-gradient(rgba(232,245,233,0.25),rgba(227,242,253,0.25)), url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')";
+} else if(scroll < 900){
+  body.style.backgroundImage =
+    "linear-gradient(rgba(232,245,233,0.25),rgba(227,242,253,0.25)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
+} else {
+  body.style.backgroundImage =
+    "linear-gradient(rgba(232,245,233,0.25),rgba(227,242,253,0.25)), url('https://res.cloudinary.com/enchanting/q_70,f_auto,c_lfill,g_auto/exodus-web/2021/12/kirkjufellsfoss_iceland.jpg')";
+}
     });
   </script>
 
