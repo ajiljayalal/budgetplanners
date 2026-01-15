@@ -1,783 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Budget Planners – Adventure for Less</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg-light: #e8f5e9;
-      --bg-light-blue: #e3f2fd;
-      --primary: #2e7d32;
-      --primary-dark: #1b5e20;
-      --accent: #4fc3f7;
-      --accent-warm: #fbc02d;
-      --text-main: #2e2e2e;
-      --radius-lg: 20px;
-      --shadow-soft: 0 18px 35px rgba(0,0,0,.12);
-      --shadow-strong: 0 30px 55px rgba(0,0,0,.18);
-      --transition-fast: .3s ease;
-    }
+<meta charset="UTF-8">
+<title>Budget Planners – Adventure for Less</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+<style>
+:root{
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --accent: #4fc3f7;
+  --accent-warm: #fbc02d;
+  --radius-lg: 20px;
+}
 
-     body{
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* BODY */
+body{
   font-family:'Montserrat',sans-serif;
   color:#2e2e2e;
-  margin:0;
-  transition: background 1s ease-in-out;
-
-  /* CLEAR, FULL‑PAGE, SHARP BACKGROUND */
   background:
     linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)),
     url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')
     center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll; /* prevents blur on mobile */
-}
-    
-
-    header{
-      position: relative;
-      overflow: hidden;
-      padding: 120px 20px 140px;
-      text-align: center;
-      color: green;
-    }
-
-    header::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(circle at top, rgba(0,0,0,.35), transparent 55%);
-      mix-blend-mode:multiply;
-      pointer-events:none;
-    }
-
-    .header-inner{
-      position:relative;
-      max-width:1100px;
-      margin:0 auto;
-      z-index:1;
-    }
-
-   header h1{
-  font-size: 3.8rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  background: linear-gradient(90deg, #2e7d32, #43a047, #4fc3f7);
-  -webkit-background-clip: text;
-  color: transparent;
+  background-size:cover;
+  background-repeat:no-repeat;
+  transition:background-image .8s ease-in-out;
 }
 
-    header p{
-      margin-top:18px;
-      font-size: clamp(1.1rem, 2.4vw, 1.4rem);
-      color:#e8f5e9;
-      text-shadow:0 3px 8px rgba(0,0,0,.4);
-    }
-
-    .header-tagline{
-      margin-top:26px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 18px;
-      border-radius:999px;
-      background:rgba(255,255,255,.12);
-      backdrop-filter:blur(8px);
-      font-size:.9rem;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-    }
-
-    .header-tagline span{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:linear-gradient(135deg,#43a047,#fbc02d);
-      box-shadow:0 0 12px rgba(251,192,45,.8);
-    }
-
-  <!  #hiker{
-      position:absolute;
-      bottom:10px;
-      right:20px;
-      width:90px;
-      height:110px;
-      z-index:2;
-      background:url('https://static.vecteezy.com/system/resources/previews/021/035/113/non_2x/hiking-icon-vector.jpg') no-repeat center/contain;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.5));
-      animation: bob 3.5s ease-in-out infinite;
-    }>--
-
-    @keyframes bob{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-6px)}
-    }
-
- <!    .cloud{
-      position:absolute;
-      top:20px;
-      width:150px;
-      height:80px;
-      background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjZ7VxkqUdCWqyIldlWFuUC80IcO5vAUeDbQ&s') no-repeat center/contain;
-      opacity:0.7;
-      z-index:1;
-    }>--
-
-    .cloud.cloud-1{top:30px;left:-220px;animation:cloud1 60s linear infinite;}
-    .cloud.cloud-2{top:80px;left:-260px;width:200px;height:100px;animation:cloud2 80s linear infinite;}
-    .cloud.cloud-3{top:50px;left:-180px;width:180px;height:90px;animation:cloud3 100s linear infinite;}
-
-    @keyframes cloud1{0%{left:-220px}100%{left:120%}}
-    @keyframes cloud2{0%{left:-260px}100%{left:130%}}
-    @keyframes cloud3{0%{left:-180px}100%{left:125%}}
-
-    .bird{
-      position:absolute;
-      width:50px;
-      height:34px;
-      background:url('https://upload.wikimedia.org/wikipedia/commons/5/54/Twitter_bird_logo.svg') no-repeat center/contain;
-      z-index:2;
-      top:60px;
-      left:-120px;
-      opacity:.9;
-      animation:fly 22s linear infinite;
-    }
-
-    .bird.bird-1{top:110px;animation-duration:18s;}
-    .bird.bird-2{top:70px;animation-duration:24s;left:-200px;}
-
-    @keyframes fly{0%{left:-120px;transform:translateY(0)}50%{transform:translateY(-10px)}100%{left:120%;transform:translateY(0)}}
-
-    main{
-      max-width:1100px;
-      margin:0 auto;
-      padding:60px 20px 80px;
-    }
-
-    section{
-      padding:40px 0;
-    }
-
-    h2{
-      text-align:center;
-      margin-bottom:35px;
-      font-size:2.1rem;
-      color:var(--primary-dark);
-      position:relative;
-      display:inline-block;
-      left:50%;
-      transform:translateX(-50%);
-    }
-
-    h2::after{
-      content:"";
-      width:90px;
-      height:4px;
-      background:linear-gradient(90deg,#43a047,#fbc02d);
-      display:block;
-      margin:14px auto 0;
-      border-radius:4px;
-    }
-
-    .quote-section{
-      text-align:center;
-      padding-top:10px;
-    }
-
-    .quote-section p{
-      font-size:1.2rem;
-      color:#33691e;
-      max-width:600px;
-      margin:0 auto;
-      line-height:1.6;
-      font-weight:500;
-    }
-
-    .quote-section p span{
-      display:block;
-      margin-top:10px;
-      font-size:.9rem;
-      text-transform:uppercase;
-      letter-spacing:.16em;
-      color:#558b2f;
-    }
-
-    .trips{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:28px;
-      margin-top:10px;
-    }
-
-    .trip{
-      background:linear-gradient(180deg,#ffffff,#f1f8e9);
-      border-radius:var(--radius-lg);
-      padding:26px 24px 24px;
-      box-shadow:var(--shadow-soft);
-      border-left:6px solid #43a047;
-      position:relative;
-      transition:transform var(--transition-fast), box-shadow var(--transition-fast), background .4s ease;
-      overflow:hidden;
-    }
-
-    .trip::before{
-      content:"⛰";
-      position:absolute;
-      top:12px;
-      right:16px;
-      font-size:1.6rem;
-      opacity:.12;
-    }
-
-    .trip::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -60px;
-      height:120px;
-      background:radial-gradient(circle at bottom, rgba(67,160,71,.18), transparent 60%);
-      opacity:0;
-      transition:opacity .4s ease;
-    }
-
-    .trip:hover{
-      transform:translateY(-8px) scale(1.02);
-      box-shadow:var(--shadow-strong);
-      background:linear-gradient(180deg,#ffffff,#e8f5e9);
-    }
-
-    .trip:hover::after{
-      opacity:1;
-    }
-
-    .trip h3{
-      margin-bottom:8px;
-      color:var(--primary);
-      font-size:1.2rem;
-    }
-
-    .trip p{
-      font-size:.95rem;
-      color:#455a64;
-      line-height:1.5;
-    }
-
-    .price{
-      font-weight:700;
-      font-size:1.05rem;
-      color:var(--primary-dark);
-      margin-top:14px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      margin-top:10px;
-      padding:4px 10px;
-      border-radius:999px;
-      background:rgba(76,175,80,.08);
-      font-size:.75rem;
-      color:#2e7d32;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-    }
-
-    .badge span{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:#43a047;
-    }
-
-    .layout-two-col{
-      display:grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap:40px;
-      align-items:flex-start;
-      margin-top:10px;
-    }
-
-    .booking-form{
-      background:linear-gradient(180deg,#ffffff,#e3f2fd);
-      padding:32px 28px;
-      border-radius:var(--radius-lg);
-      box-shadow:0 20px 40px rgba(0,0,0,.12);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .booking-form::before{
-      content:"";
-      position:absolute;
-      inset:-40px -40px auto auto;
-      height:120px;
-      background:radial-gradient(circle at top right, rgba(79,195,247,.25), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-
-    .booking-form h3{
-      margin-bottom:16px;
-      color:var(--primary-dark);
-      font-size:1.3rem;
-    }
-
-    .booking-form p{
-      font-size:.9rem;
-      color:#546e7a;
-      margin-bottom:18px;
-    }
-
-    .booking-form label{
-      display:block;
-      font-size:.85rem;
-      font-weight:500;
-      margin-bottom:6px;
-      color:#455a64;
-    }
-
-    .booking-form input,
-    .booking-form select,
-    .booking-form button{
-      width:100%;
-      padding:13px 14px;
-      margin-bottom:16px;
-      border-radius:10px;
-      border:1px solid #c8e6c9;
-      font-family:inherit;
-      font-size:.95rem;
-      background-color:#ffffff;
-    }
-
-    .booking-form input:focus,
-    .booking-form select:focus{
-      outline:none;
-      border-color:#43a047;
-      box-shadow:0 0 0 2px rgba(67,160,71,.18);
-    }
-
-    .booking-form button{
-      background:linear-gradient(90deg,#43a047,#2e7d32);
-      color:white;
-      font-size:1.02rem;
-      font-weight:600;
-      border:none;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      margin-top:4px;
-    }
-
-    .booking-form button span.icon{
-      opacity:0;
-      transform:translateX(6px);
-      transition:var(--transition-fast);
-    }
-
-    .booking-form button::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(120deg,rgba(255,255,255,.18),transparent 60%);
-      transform:translateX(-100%);
-      transition:transform .5s ease;
-    }
-
-    .booking-form button:hover::before{
-      transform:translateX(100%);
-    }
-
-    .booking-form button:hover span.icon{
-      opacity:1;
-      transform:translateX(0);
-    }
-
-    .booking-note{
-      font-size:.8rem;
-      color:#78909c;
-      margin-top:4px;
-    }
-
-    footer{
-      background:linear-gradient(90deg,#1b5e20,#2e7d32);
-      color:white;
-      text-align:center;
-      padding:32px 20px 26px;
-      margin-top:20px;
-    }
-
-    footer p{
-      margin-bottom:4px;
-    }
-
-    footer small{
-      display:block;
-      margin-top:6px;
-      font-size:.8rem;
-      opacity:.85;
-    }
-
-    .chat-toggle{
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      width:58px;
-      height:58px;
-      background:radial-gradient(circle at 20% 20%, #fbc02d, #43a047);
-      color:white;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:1.7rem;
-      cursor:pointer;
-      box-shadow:0 12px 30px rgba(0,0,0,.35);
-      animation:float 3s ease-in-out infinite;
-      z-index:999;
-      border:none;
-    }
-
-    .chat-toggle:focus-visible{
-      outline:2px solid white;
-      outline-offset:3px;
-    }
-
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-    .chatbot{
-      position:fixed;
-      bottom:95px;
-      right:20px;
-      width:320px;
-      background:linear-gradient(180deg,#ffffff,#e8f5e9);
-      border-radius:18px;
-      box-shadow:0 25px 50px rgba(0,0,0,.3);
-      overflow:hidden;
-      font-size:.9rem;
-      transform:scale(0.9);
-      opacity:0;
-      transform-origin:bottom right;
-      transition:opacity .25s ease, transform .25s ease;
-      z-index:1000;
-      pointer-events:none;
-    }
-
-    .chatbot.active{
-      transform:scale(1);
-      opacity:1;
-      pointer-events:auto;
-    }
-
-    .chat-header{
-      background:linear-gradient(90deg,#43a047,#4fc3f7);
-      color:white;
-      padding:14px 16px;
-      font-weight:700;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .chat-header-title{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-    }
-
-    .chat-header-title span.sub{
-      font-weight:400;
-      font-size:.75rem;
-      opacity:.9;
-    }
-
-    .chat-close{
-      cursor:pointer;
-      font-size:1.1rem;
-      line-height:1;
-    }
-
-    .chat-body{
-      height:260px;
-      padding:12px 14px;
-      overflow-y:auto;
-      background:linear-gradient(180deg,#f1f8e9,#ffffff);
-    }
-
-    .chat-input{
-      display:flex;
-      border-top:1px solid #c8e6c9;
-      background:#ffffff;
-    }
-
-    .chat-input input{
-      flex:1;
-      padding:11px 12px;
-      border:none;
-      outline:none;
-      font-family:inherit;
-      font-size:.9rem;
-    }
-
-    .chat-input button{
-      background:#43a047;
-      color:white;
-      border:none;
-      padding:0 16px;
-      cursor:pointer;
-      font-size:.9rem;
-      display:flex;
-      align-items:center;
-      gap:4px;
-    }
-
-    .chat-input button:hover{
-      background:#2e7d32;
-    }
-
-    .message{
-      margin-bottom:8px;
-      max-width:85%;
-      line-height:1.4;
-      word-wrap:break-word;
-    }
-
-    .message.bot{
-      color:#2e7d32;
-      background:rgba(232,245,233,.9);
-      padding:8px 10px;
-      border-radius:10px 10px 10px 2px;
-    }
-
-    .message.user{
-      text-align:right;
-      margin-left:auto;
-      font-weight:500;
-      background:#e3f2fd;
-      padding:8px 10px;
-      border-radius:10px 10px 2px 10px;
-      color:#1a237e;
-    }
-
-    .message.meta{
-      text-align:center;
-      font-size:.75rem;
-      color:#90a4ae;
-      margin:6px 0;
-    }
-
-    @media(max-width:900px){
-      .layout-two-col{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media(max-width:768px){
-      header{
-        padding:90px 15px 120px;
-      }
-      h2{
-        font-size:1.8rem;
-      }
-    }
-
-    @media(max-width:600px){
-      .trips{
-        grid-template-columns:1fr;
-        gap:20px;
-      }
-    }
-
-    @media(max-width:480px){
-      .booking-form{
-        padding:22px 18px;
-      }
-      .chatbot{
-       transform: scale(0);
-  opacity: 0;
-  transition: 0.25s ease;
-  pointer-events: none;
-
-      }
-      .chat-toggle{
-       z-index: 99999;
-  cursor: pointer;
-  touch-action: manipulation;
-
-      }
-    }
-  </style>
+/* HEADER */
+header{
+  padding:120px 20px 140px;
+  text-align:center;
+  position:relative;
+}
+
+header h1{
+  font-size:3.8rem;
+  font-weight:800;
+  background:linear-gradient(90deg,#2e7d32,#43a047,#4fc3f7);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+header p{
+  margin-top:18px;
+  font-size:1.4rem;
+  color:white;
+  text-shadow:0 3px 8px rgba(0,0,0,.4);
+}
+
+/* SECTIONS */
+main{max-width:1100px;margin:auto;padding:60px 20px}
+
+h2{
+  text-align:center;
+  font-size:2.2rem;
+  color:var(--primary-dark);
+  margin-bottom:35px;
+}
+
+/* TRIPS */
+.trips{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+
+.trip{
+  background:white;
+  padding:26px;
+  border-radius:var(--radius-lg);
+  border-left:6px solid #43a047;
+  box-shadow:0 18px 35px rgba(0,0,0,.12);
+  transition:.3s ease;
+}
+
+.trip:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 55px rgba(0,0,0,.18);
+}
+
+.price{
+  margin-top:12px;
+  font-weight:700;
+  color:var(--primary-dark);
+}
+
+/* FORM */
+.booking-form{
+  background:white;
+  padding:32px;
+  border-radius:var(--radius-lg);
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form button{
+  width:100%;
+  padding:14px;
+  margin-bottom:16px;
+  border-radius:10px;
+  border:1px solid #c8e6c9;
+}
+
+.booking-form button{
+  background:linear-gradient(90deg,#43a047,#2e7d32);
+  color:white;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(90deg,#1b5e20,#2e7d32);
+  color:white;
+  text-align:center;
+  padding:32px 20px;
+}
+
+/* CHAT BUTTON */
+.chat-toggle{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:58px;
+  height:58px;
+  background:radial-gradient(circle at 20% 20%, #fbc02d, #43a047);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.7rem;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  z-index:9999;
+}
+
+/* CHATBOX */
+.chatbot{
+  position:fixed;
+  bottom:95px;
+  right:20px;
+  width:320px;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  transform:scale(0.9);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s ease;
+  z-index:10000;
+}
+
+.chatbot.active{
+  transform:scale(1);
+  opacity:1;
+  pointer-events:auto;
+}
+
+.chat-header{
+  background:linear-gradient(90deg,#43a047,#4fc3f7);
+  color:white;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.chat-close{
+  cursor:pointer;
+  font-size:1.2rem;
+}
+
+.chat-body{
+  height:260px;
+  overflow-y:auto;
+  padding:12px;
+  background:#f1f8e9;
+}
+
+.message{
+  margin-bottom:8px;
+  padding:8px 10px;
+  border-radius:10px;
+  max-width:85%;
+}
+
+.message.bot{
+  background:#e8f5e9;
+  color:#2e7d32;
+}
+
+.message.user{
+  background:#e3f2fd;
+  color:#1a237e;
+  margin-left:auto;
+}
+
+.chat-input{
+  display:flex;
+  border-top:1px solid #c8e6c9;
+}
+
+.chat-input input{
+  flex:1;
+  padding:12px;
+  border:none;
+}
+
+.chat-input button{
+  background:#43a047;
+  color:white;
+  border:none;
+  padding:0 16px;
+}
+
+</style>
 </head>
+
 <body>
 
-  <header aria-label="BudgetPlanners hero section">
-    <div class="cloud cloud-1" aria-hidden="true"></div>
-    <div class="cloud cloud-2" aria-hidden="true"></div>
-    <div class="cloud cloud-3" aria-hidden="true"></div>
-    <div class="bird bird-1" aria-hidden="true"></div>
-    <div class="bird bird-2" aria-hidden="true"></div>
-    <div id="hiker" aria-hidden="true"></div>
+<header>
+  <h1>Budget Planners</h1>
+  <p>Big Adventures. Small Budgets.</p>
+</header>
 
-    <div class="header-inner">
-      <h1>Budget Planners</h1>
-      <p>Big Adventures. Small Budgets. 🌍</p>
-      <div class="header-tagline" aria-hidden="true">
-        <span></span> Nature-first journeys for mindful travelers
-      </div>
-    </div>
-  </header>
+<main>
 
-  <main>
-    <section class="quote-section" aria-label="Inspirational quote">
-      <p>
-        “The best paths are the ones less traveled.” 🌲
-        <span>Follow the quiet trails, not the crowded ones.</span>
-      </p>
-    </section>
-
-    <section aria-labelledby="top-adventures">
-      <h2 id="top-adventures">Top Budget Adventures</h2>
-      <div class="trips">
-        <article class="trip" aria-label="Spain Asturias budget trip">
-          <h3>🇪🇸 Spain – Asturias</h3>
-          <p>Green mountains, coastal hikes, fishing villages, and misty valleys that feel untouched.</p>
-          <div class="price">From €99</div>
-          <div class="badge"><span></span> Most budget-friendly</div>
-        </article>
-
-        <article class="trip" aria-label="Switzerland budget trip">
-          <h3>🇨🇭 Switzerland</h3>
-          <p>Alpine trails, crystal lakes, and scenic trains weaving through snow-capped peaks.</p>
-          <div class="price">From €749</div>
-          <div class="badge"><span></span> Scenic rail escapes</div>
-        </article>
-
-        <article class="trip" aria-label="Iceland budget trip">
-          <h3>🇮🇸 Iceland</h3>
-          <p>Glaciers, volcanoes, waterfalls, and northern lights over quiet, wild landscapes.</p>
-          <div class="price">From €949</div>
-          <div class="badge"><span></span> Northern lights favorite</div>
-        </article>
-      </div>
-    </section>
-
-    <section aria-labelledby="plan-hike">
-      <h2 id="plan-hike">Plan Your Hike</h2>
-      <div class="layout-two-col">
-        <div>
-          <p style="color:#39b535; line-height:1.7; font-size:.98rem;">
-            Tell us when and where you’d like to go, and we’ll match you with a trail that fits your budget,
-            your pace, and your love for nature. No luxury fluff—just honest, beautiful routes.
-          </p>
-          <p style="margin-top:14px; color:#193261; font-size:.9rem;">
-            Every itinerary is crafted to minimize costs and maximize time outdoors, with local stays,
-            slow travel, and hidden-gem paths.
-          </p>
-        </div>
-
-        <form class="booking-form" aria-label="Trip trip booking form" onsubmit="sendToWhatsApp(event)">
-          <h3>Start your next Trip</h3>
-          <p>Share a few details and we’ll send you a curated budget plan within 24 hours.</p>
-
-          <label for="fullName">Full Name</label>
-          <input id="fullName" type="text" placeholder="Your full name" required>
-
-          <label for="email">Email Address</label>
-          <input id="email" type="email" placeholder="you@example.com" required>
-
-          <label for="adventure">Choose Adventure</label>
-          <select id="adventure" required>
-            <option value="">Select a destination</option>
-            <option value="asturias">Spain – Asturias</option>
-            <option value="switzerland">Switzerland</option>
-            <option value="iceland">Iceland</option>
-            <option value="Other">Other Desitination</option>
-          </select>
-
-          <label for="date">Preferred Start Date</label>
-          <input id="date" type="date" required>
-           <label for="date1">Preferred End Date</label>
-          <input id="date1" type="date" required>
-
-          <button type="submit">
-            Start the Journey
-            <span class="icon">🥾</span>
-          </button>
-          <div class="booking-note">
-            No payment required yet. We’ll email you a custom plan and next steps.
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2026 BudgetPlanners – Adventure Made Affordable</p>
-    <small>Founded by Ajil Jayalal</small>
-  </footer>
-
-  <button class="chat-toggle" id="chatToggle" aria-label="Open Trip guide chat">
-    💬
-  </button>
-
-  <div class="chatbot" id="chatbot" aria-label="Trip Guide Bot" aria-hidden="true">
-    <div class="chat-header">
-      <div class="chat-header-title">
-        <span>Trip Guide Bot 🌲</span>
-        <span class="sub">Ask about trips, budgets, or seasons</span>
-      </div>
-      <span class="chat-close" id="chatClose" aria-label="Close chat" role="button">✖</span>
-    </div>
-    <div class="chat-body" id="chatBody">
-      <div class="message bot">Hey Traveller! Looking for a budget-friendly Trip?</div>
-      <div class="message meta">Try asking: “cheapest trip”, “best nature”, or “how to book”.</div>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="chatInput" placeholder="Ask about trips..." aria-label="Chat message">
-      <button id="chatSend" aria-label="Send message">
-        Send
-      </button>
-    </div>
+<h2>Top Budget Adventures</h2>
+<div class="trips">
+  <div class="trip">
+    <h3>Spain – Asturias</h3>
+    <p>Green mountains, coastal hikes & villages.</p>
+    <div class="price">From €99</div>
   </div>
 
-  <script>
- // Chatbot
-const chatToggleBtn = document.querySelector('.chat-toggle');   // the button
-const chatbotEl = document.getElementById('chatbot');           // the chat box
-const chatCloseBtn = document.getElementById('chatClose');      // close icon (must exist)
+  <div class="trip">
+    <h3>Switzerland</h3>
+    <p>Alpine trails & scenic trains.</p>
+    <div class="price">From €749</div>
+  </div>
+
+  <div class="trip">
+    <h3>Iceland</h3>
+    <p>Glaciers, volcanoes & northern lights.</p>
+    <div class="price">From €949</div>
+  </div>
+</div>
+
+<h2>Plan Your Hike</h2>
+<form class="booking-form" onsubmit="sendToWhatsApp(event)">
+  <input id="fullName" type="text" placeholder="Full Name" required>
+  <input id="email" type="email" placeholder="Email Address" required>
+  <select id="adventure" required>
+    <option value="">Choose Adventure</option>
+    <option>Asturias</option>
+    <option>Switzerland</option>
+    <option>Iceland</option>
+  </select>
+  <input id="date" type="date" required>
+  <input id="date1" type="date" required>
+  <button type="submit">Start the Journey</button>
+</form>
+
+</main>
+
+<footer>
+  <p>© 2026 BudgetPlanners – Adventure Made Affordable</p>
+</footer>
+
+<!-- CHAT BUTTON -->
+<div class="chat-toggle" id="chatToggle">💬</div>
+
+<!-- CHATBOX -->
+<div class="chatbot" id="chatbot">
+  <div class="chat-header">
+    <span>Trip Guide Bot</span>
+    <span class="chat-close" id="chatClose">✖</span>
+  </div>
+
+  <div class="chat-body" id="chatBody">
+    <div class="message bot">Hey Traveller! Looking for a budget-friendly trip?</div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ask about trips...">
+    <button id="chatSend">Send</button>
+  </div>
+</div>
+
+<script>
+// ELEMENTS
+const chatToggleBtn = document.getElementById('chatToggle');
+const chatbotEl = document.getElementById('chatbot');
+const chatCloseBtn = document.getElementById('chatClose');
 const chatBody = document.getElementById('chatBody');
 const chatInput = document.getElementById('chatInput');
 const chatSend = document.getElementById('chatSend');
 
+// OPEN/CLOSE CHAT
 function toggleChat(forceOpen){
   const isActive = chatbotEl.classList.contains('active');
   const shouldOpen = forceOpen === true || !isActive;
-
   chatbotEl.classList.toggle('active', shouldOpen);
-  chatbotEl.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
-
-  if(shouldOpen){
-    setTimeout(() => chatInput.focus(), 150);
-  }
+  if(shouldOpen){ setTimeout(()=>chatInput.focus(),150); }
 }
 
 chatToggleBtn.addEventListener('click', () => toggleChat());
-if(chatCloseBtn){
-  chatCloseBtn.addEventListener('click', () => toggleChat(false));
-}
+chatCloseBtn.addEventListener('click', () => toggleChat(false));
 
+// MESSAGES
 function appendMessage(text, type){
   const div = document.createElement('div');
   div.className = 'message ' + type;
@@ -787,77 +325,54 @@ function appendMessage(text, type){
 }
 
 function getBotReply(msg){
-  const text = msg.toLowerCase();
-
-  if(text.includes('cheap') || text.includes('price') || text.includes('budget')){
-    return 'Asturias is our most budget-friendly hike 🌿—great views, low costs, and easy connections from major cities.';
-  } else if(text.includes('best') || text.includes('favorite') || text.includes('nature')){
-    return 'For pure nature, Asturias and Iceland are top picks ⛰—lush green valleys or wild volcanic landscapes.';
-  } else if(text.includes('book') || text.includes('reserve') || text.includes('start')){
-    return 'Use the “Plan Your Hike” form above to start your journey 🥾. We’ll email you a custom plan.';
-  } else if(text.includes('when') || text.includes('season')){
-    return 'Spring and early autumn are ideal for quieter trails and softer light in all three destinations 🍃';
-  } else {
-    return 'Please fill out the form, we will contact you as soon as possible.';
-  }
+  const t = msg.toLowerCase();
+  if(t.includes('cheap') || t.includes('budget')) return 'Asturias is our most budget-friendly trip!';
+  if(t.includes('best') || t.includes('nature')) return 'Asturias and Iceland are top nature picks.';
+  if(t.includes('book')) return 'Use the form above to start your journey.';
+  return 'Please fill out the form and we will contact you soon.';
 }
 
 function sendMessage(){
   const value = chatInput.value.trim();
   if(!value) return;
-
-  appendMessage(value, 'user');
-  const reply = getBotReply(value);
-
-  setTimeout(() => appendMessage(reply, 'bot'), 300);
-  chatInput.value = '';
+  appendMessage(value,'user');
+  setTimeout(()=>appendMessage(getBotReply(value),'bot'),300);
+  chatInput.value='';
 }
 
 chatSend.addEventListener('click', sendMessage);
-
-chatInput.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter'){
-    e.preventDefault();
-    sendMessage();
-  }
+chatInput.addEventListener('keydown', e=>{
+  if(e.key==='Enter'){ e.preventDefault(); sendMessage(); }
 });
+
+// WHATSAPP FORM
 function sendToWhatsApp(event){
   event.preventDefault();
+  const name = fullName.value;
+  const email = email.value;
+  const trip = adventure.value;
+  const dateFrom = date.value;
+  const dateTo = date1.value;
 
-  // Get form values
-  const name = document.querySelector('.booking-form input[type="text"]').value;
-  const email = document.querySelector('.booking-form input[type="email"]').value;
-  const trip = document.querySelector('.booking-form select').value;
-  const date = document.querySelector('.booking-form input[type="date"]').value;
- const date1 = document.querySelector('.booking-form input[type="date1"]').value;
-  // Your WhatsApp number (international format, no +)
-  const phone = "+34604294900"; // 
+  const phone = "34604294900";
+  const msg =
+    `New Booking Request:%0AName: ${name}%0AEmail: ${email}%0ATrip: ${trip}%0AFrom: ${dateFrom}%0ATo: ${dateTo}`;
 
-  // Build message
-  const message =
-    `New Booking Request:%0A` +
-    `Name: ${name}%0A` +
-    `Email: ${email}%0A` +
-    `Trip: ${trip}%0A` +
-    `Date from: ${date}`+
-    `Date to: ${date1}``;
-
-  // Redirect to WhatsApp
-  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+  window.open(`https://wa.me/${phone}?text=${msg}`,"_blank");
 }
 
-    window.addEventListener('scroll', () => {
-      const scroll = window.scrollY;
-      const body = document.body;
-if(scroll < 400){
-  body.style.backgroundImage =
-    "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')";
-} else {
-  body.style.backgroundImage =
-    "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
-}
-    });
-  </script>
+// BACKGROUND SCROLL
+window.addEventListener('scroll',()=>{
+  const scroll = window.scrollY;
+  if(scroll < 400){
+    document.body.style.backgroundImage =
+      "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')";
+  } else {
+    document.body.style.backgroundImage =
+      "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
+  }
+});
+</script>
 
 </body>
 </html>
