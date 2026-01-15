@@ -753,67 +753,74 @@
   </div>
 
   <script>
-    
-    const chatbotEl = document.querySelector('.chat-toggle').addEventListener('click', toggleChat);
-    const chatToggleBtn = document.getElementById('chatToggle');
-    const chatCloseBtn = document.getElementById('chatClose');
-    const chatBody = document.getElementById('chatBody');
-    const chatInput = document.getElementById('chatInput');
-    const chatSend = document.getElementById('chatSend');
+ // Chatbot
+const chatToggleBtn = document.querySelector('.chat-toggle');   // the button
+const chatbotEl = document.getElementById('chatbot');           // the chat box
+const chatCloseBtn = document.getElementById('chatClose');      // close icon (must exist)
+const chatBody = document.getElementById('chatBody');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
 
-    function toggleChat(forceOpen){
-      const isActive = chatbotEl.classList.contains('active');
-      const shouldOpen = forceOpen === true || !isActive;
-      chatbotEl.classList.toggle('active', shouldOpen);
-      chatbotEl.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
-      if(shouldOpen){
-        setTimeout(() => chatInput.focus(), 150);
-      }
-    }
+function toggleChat(forceOpen){
+  const isActive = chatbotEl.classList.contains('active');
+  const shouldOpen = forceOpen === true || !isActive;
 
-    chatToggleBtn.addEventListener('click', () => toggleChat());
-    chatCloseBtn.addEventListener('click', () => toggleChat(false));
+  chatbotEl.classList.toggle('active', shouldOpen);
+  chatbotEl.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
 
-    function appendMessage(text, type){
-      const div = document.createElement('div');
-      div.className = 'message ' + type;
-      div.textContent = text;
-      chatBody.appendChild(div);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
+  if(shouldOpen){
+    setTimeout(() => chatInput.focus(), 150);
+  }
+}
 
-    function getBotReply(msg){
-      const text = msg.toLowerCase();
+chatToggleBtn.addEventListener('click', () => toggleChat());
+if(chatCloseBtn){
+  chatCloseBtn.addEventListener('click', () => toggleChat(false));
+}
 
-      if(text.includes('cheap') || text.includes('price') || text.includes('budget')){
-        return 'Asturias is our most budget-friendly hike 🌿—great views, low costs, and easy connections from major cities.';
-      } else if(text.includes('best') || text.includes('favorite') || text.includes('nature')){
-        return 'For pure nature, Asturias and Iceland are top picks ⛰—lush green valleys or wild volcanic landscapes.';
-      } else if(text.includes('book') || text.includes('reserve') || text.includes('start')){
-        return 'Use the “Plan Your Hike” form above to start your journey 🥾. We’ll email you a custom plan.';
-      } else if(text.includes('when') || text.includes('season')){
-        return 'Spring and early autumn are ideal for quieter trails and softer light in all three destinations 🍃';
-      } else {
-        return 'Please fill out the form, we will contact you as soon as possible”.';
-      }
-    }
+function appendMessage(text, type){
+  const div = document.createElement('div');
+  div.className = 'message ' + type;
+  div.textContent = text;
+  chatBody.appendChild(div);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
 
-    function sendMessage(){
-      const value = chatInput.value.trim();
-      if(!value) return;
-      appendMessage(value, 'user');
-      const reply = getBotReply(value);
-      setTimeout(() => appendMessage(reply, 'bot'), 300);
-      chatInput.value = '';
-    }
+function getBotReply(msg){
+  const text = msg.toLowerCase();
 
-    chatSend.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        sendMessage();
-      }
-    });
+  if(text.includes('cheap') || text.includes('price') || text.includes('budget')){
+    return 'Asturias is our most budget-friendly hike 🌿—great views, low costs, and easy connections from major cities.';
+  } else if(text.includes('best') || text.includes('favorite') || text.includes('nature')){
+    return 'For pure nature, Asturias and Iceland are top picks ⛰—lush green valleys or wild volcanic landscapes.';
+  } else if(text.includes('book') || text.includes('reserve') || text.includes('start')){
+    return 'Use the “Plan Your Hike” form above to start your journey 🥾. We’ll email you a custom plan.';
+  } else if(text.includes('when') || text.includes('season')){
+    return 'Spring and early autumn are ideal for quieter trails and softer light in all three destinations 🍃';
+  } else {
+    return 'Please fill out the form, we will contact you as soon as possible.';
+  }
+}
+
+function sendMessage(){
+  const value = chatInput.value.trim();
+  if(!value) return;
+
+  appendMessage(value, 'user');
+  const reply = getBotReply(value);
+
+  setTimeout(() => appendMessage(reply, 'bot'), 300);
+  chatInput.value = '';
+}
+
+chatSend.addEventListener('click', sendMessage);
+
+chatInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    sendMessage();
+  }
+});
 function sendToWhatsApp(event){
   event.preventDefault();
 
