@@ -34,7 +34,8 @@
       background: linear-gradient(rgba(232,245,233,0.92), rgba(227,242,253,0.92)),
                   url('https://cdn.pixabay.com/photo/2019/09/25/09/20/asturias-4499408_1280.jpg') no-repeat center center fixed;
       background-size: cover;
-      transition: background-image 1s ease-in-out, background-position 1s ease-in-out;
+  transition: background-image 1.4s ease-in-out, background-size 1s ease-in-out;
+  background-attachment: fixed;
     }
 
     header{
@@ -642,7 +643,7 @@
         <article class="trip" aria-label="Spain Asturias budget trip">
           <h3>🇪🇸 Spain – Asturias</h3>
           <p>Green mountains, coastal hikes, fishing villages, and misty valleys that feel untouched.</p>
-          <div class="price">From €599</div>
+          <div class="price">From €99</div>
           <div class="badge"><span></span> Most budget-friendly</div>
         </article>
 
@@ -656,7 +657,7 @@
         <article class="trip" aria-label="Iceland budget trip">
           <h3>🇮🇸 Iceland</h3>
           <p>Glaciers, volcanoes, waterfalls, and northern lights over quiet, wild landscapes.</p>
-          <div class="price">From €799</div>
+          <div class="price">From €949</div>
           <div class="badge"><span></span> Northern lights favorite</div>
         </article>
       </div>
@@ -691,7 +692,8 @@
             <option value="">Select a destination</option>
             <option value="asturias">Spain – Asturias</option>
             <option value="switzerland">Switzerland</option>
-            <option value="iceland">Iceland</option>
+            <option value="iceland">Iceland</option>\
+             <option value="Others">Other Destination</option>
           </select>
 
           <label for="date">Preferred Start Date</label>
@@ -727,7 +729,7 @@
       <span class="chat-close" id="chatClose" aria-label="Close chat" role="button">✖</span>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="message bot">Hey hiker! 🥾 Looking for a budget-friendly trail?</div>
+      <div class="message bot">Hey Traveller! Looking for a budget-friendly trip?</div>
       <div class="message meta">Try asking: “cheapest trip”, “best nature”, or “how to book”.</div>
     </div>
     <div class="chat-input">
@@ -800,21 +802,46 @@
       }
     });
 
-    window.addEventListener('scroll', () => {
-      const scroll = window.scrollY;
-      const body = document.body;
+ // Smooth multi-stage background transitions
+window.addEventListener('scroll', () => {
+  const scroll = window.scrollY;
+  const body = document.body;
 
-      if(scroll < 400){
-        body.style.backgroundImage =
-          "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2019/09/25/09/20/asturias-4499408_1280.jpg')";
-      } else if(scroll < 900){
-        body.style.backgroundImage =
-          "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2024/05/07/11/01/forest-7179561_1280.jpg')";
-      } else {
-        body.style.backgroundImage =
-          "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2020/11/16/02/26/spain-5751129_1280.jpg')";
-      }
-    });
+  if (scroll < 300) {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2019/09/25/09/20/asturias-4499408_1280.jpg')";
+  } 
+  else if (scroll < 600) {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(230,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2016/11/23/15/39/spain-1854191_1280.jpg')"; 
+    // Asturias cliffs
+  } 
+  else if (scroll < 900) {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2018/07/15/10/08/cudillero-3538940_1280.jpg')";
+    // Asturias coastal village
+  } 
+  else if (scroll < 1200) {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(225,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2017/01/20/00/30/lake-brienz-1993645_1280.jpg')";
+    // Switzerland – Lake Brienz
+  } 
+  else if (scroll < 1500) {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(225,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2016/10/16/16/33/lake-lucerne-1740973_1280.jpg')";
+    // Switzerland – Lake Lucerne
+  } 
+  else if (scroll < 1800) {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(225,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2018/01/15/09/43/swiss-alps-3085265_1280.jpg')";
+    // Swiss Alps valley
+  } 
+  else {
+    body.style.backgroundImage =
+      "linear-gradient(rgba(232,245,233,0.92),rgba(227,242,253,0.92)), url('https://cdn.pixabay.com/photo/2020/11/16/02/26/spain-5751129_1280.jpg')";
+    // Back to Spain nature
+  }
+});
   </script>
 
 </body>
