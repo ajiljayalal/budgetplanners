@@ -723,20 +723,20 @@
     <small>Founded by Ajil Jayalal</small>
   </footer>
 
-  <button class="chat-toggle" id="chatToggle" aria-label="Open trail guide chat">
+  <button class="chat-toggle" id="chatToggle" aria-label="Open Trip guide chat">
     💬
   </button>
 
-  <div class="chatbot" id="chatbot" aria-label="Trail Guide Bot" aria-hidden="true">
+  <div class="chatbot" id="chatbot" aria-label="Trip Guide Bot" aria-hidden="true">
     <div class="chat-header">
       <div class="chat-header-title">
-        <span>Trail Guide Bot 🌲</span>
+        <span>Trip Guide Bot 🌲</span>
         <span class="sub">Ask about trips, budgets, or seasons</span>
       </div>
       <span class="chat-close" id="chatClose" aria-label="Close chat" role="button">✖</span>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="message bot">Hey hiker! 🥾 Looking for a budget-friendly trail?</div>
+      <div class="message bot">Hey Traveller! Looking for a budget-friendly Trip?</div>
       <div class="message meta">Try asking: “cheapest trip”, “best nature”, or “how to book”.</div>
     </div>
     <div class="chat-input">
@@ -788,7 +788,7 @@
       } else if(text.includes('when') || text.includes('season')){
         return 'Spring and early autumn are ideal for quieter trails and softer light in all three destinations 🍃';
       } else {
-        return 'I can help you compare destinations, budgets, and seasons. Try asking about “cheapest trip” or “best time to go”.';
+        return 'Please fill out the form, we will contact you as soon as possible”.';
       }
     }
 
@@ -816,7 +816,7 @@ function sendToWhatsApp(event){
   const email = document.querySelector('.booking-form input[type="email"]').value;
   const trip = document.querySelector('.booking-form select').value;
   const date = document.querySelector('.booking-form input[type="date"]').value;
-
+ const date1 = document.querySelector('.booking-form input[type="date1"]').value;
   // Your WhatsApp number (international format, no +)
   const phone = "+34604294900"; // 
 
@@ -826,7 +826,8 @@ function sendToWhatsApp(event){
     `Name: ${name}%0A` +
     `Email: ${email}%0A` +
     `Trip: ${trip}%0A` +
-    `Date: ${date}`;
+    `Date from: ${date}`+
+    `Date to: ${date1}``;
 
   // Redirect to WhatsApp
   window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
