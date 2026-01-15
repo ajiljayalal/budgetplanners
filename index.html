@@ -34,7 +34,7 @@
 
   /* CLEAR, FULL‑PAGE, SHARP BACKGROUND */
   background:
-    linear-gradient(rgba(232,245,233,0.15), rgba(227,242,253,0.15)),
+    linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)),
     url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')
     center center;
   background-size: cover;
@@ -48,7 +48,7 @@
       overflow: hidden;
       padding: 120px 20px 140px;
       text-align: center;
-      color: black;
+      color: green;
     }
 
     header::after{
@@ -682,8 +682,8 @@
           </p>
         </div>
 
-        <form class="booking-form" aria-label="Hiking trip booking form" onsubmit="sendToWhatsApp(event)">
-          <h3>Start your next trail</h3>
+        <form class="booking-form" aria-label="Trip trip booking form" onsubmit="sendToWhatsApp(event)">
+          <h3>Start your next Trip</h3>
           <p>Share a few details and we’ll send you a curated budget plan within 24 hours.</p>
 
           <label for="fullName">Full Name</label>
@@ -703,8 +703,8 @@
 
           <label for="date">Preferred Start Date</label>
           <input id="date" type="date" required>
-           <label for="date">Preferred End Date</label>
-          <input id="date" type="date" required>
+           <label for="date1">Preferred End Date</label>
+          <input id="date1" type="date" required>
 
           <button type="submit">
             Start the Journey
@@ -840,7 +840,7 @@ if(scroll < 400){
     "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')";
 } else {
   body.style.backgroundImage =
-    "linear-gradient(rgba(232,245,233,0.75),rgba(227,242,253,0.75)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
+    "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
 }
     });
   </script>
