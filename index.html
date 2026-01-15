@@ -26,16 +26,22 @@
       padding:0;
     }
 
-    body{
-      font-family:'Montserrat',sans-serif;
-      color:var(--text-main);
-      margin:0;
-      min-height:100vh;
-   background: linear-gradient(rgba(232,245,233,0.30), rgba(227,242,253,0.30)),
-  url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')
-  center center;
-background-size: cover;
-    }
+     body{
+  font-family:'Montserrat',sans-serif;
+  color:#2e2e2e;
+  margin:0;
+  transition: background 1s ease-in-out;
+
+  /* CLEAR, FULL‑PAGE, SHARP BACKGROUND */
+  background:
+    linear-gradient(rgba(232,245,233,0.15), rgba(227,242,253,0.15)),
+    url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')
+    center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* prevents blur on mobile */
+}
+    
 
     header{
       position: relative;
