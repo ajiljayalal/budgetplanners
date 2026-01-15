@@ -817,33 +817,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // LIVE DATE VALIDATION
+const dateFrom = document.getElementById('date');
+const dateTo   = document.getElementById('date1');
+
+// When user selects start date
+dateFrom.addEventListener('change', () => {
+  dateTo.min = dateFrom.value;   // set minimum allowed end date
+
+  // If end date is earlier, reset it
+  if (dateTo.value < dateFrom.value) {
+    dateTo.value = dateFrom.value;
+  }
+});
+
+// When user selects end date
+dateTo.addEventListener('change', () => {
+  if (dateTo.value < dateFrom.value) {
+    dateTo.value = dateFrom.value;
+  }
+});
+
   // WHATSAPP FORM
   const form = document.querySelector('.booking-form');
   if (form) {
     form.addEventListener('submit', sendToWhatsApp);
   }
 
-  function sendToWhatsApp(event){
-    event.preventDefault();
+ function sendToWhatsApp(event){
+  event.preventDefault();
 
-    const name     = document.getElementById('fullName')?.value || '';
-    const emailVal = document.getElementById('email')?.value || '';
-    const trip     = document.getElementById('adventure')?.value || '';
-    const dateFrom = document.getElementById('date')?.value || '';
-    const dateTo   = document.getElementById('date1')?.value || '';
+  const name     = document.getElementById('fullName').value;
+  const emailVal = document.getElementById('email').value;
+  const trip     = document.getElementById('adventure').value;
+  const dateFrom = document.getElementById('date').value;
+  const dateTo   = document.getElementById('date1').value;
 
-    const phone = '34604294900';
+  const phone = "34604294900";
 
-    const msg =
-      `New Booking Request:%0A` +
-      `Name: ${name}%0A` +
-      `Email: ${emailVal}%0A` +
-      `Trip: ${trip}%0A` +
-      `From: ${dateFrom}%0A` +
-      `To: ${dateTo}`;
+  const msg =
+    `New Booking Request:%0A` +
+    `Name: ${name}%0A` +
+    `Email: ${emailVal}%0A` +
+    `Trip: ${trip}%0A` +
+    `From: ${dateFrom}%0A` +
+    `To: ${dateTo}`;
 
-    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-  }
+  // Open WhatsApp
+  window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+
+  // Show popup
+  const popup = document.getElementById("thankYouPopup");
+  popup.style.display = "block";
+  popup.style.opacity = "1";
+
+  // Fade out + refresh
+  setTimeout(() => {
+    popup.style.transition = "opacity 0.8s ease";
+    popup.style.opacity = "0";
+  }, 1500);
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 2500);
+}
 
   // BACKGROUND SCROLL
   window.addEventListener('scroll', () => {
@@ -858,6 +895,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
+<div id="thankYouPopup" style="
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  font-size: 1.1rem;
+  color: #2e7d32;
+  text-align: center;
+  display: none;
+  z-index: 999999;
+">
+  Thank you for contacting us!<br>
+  We will get back to you soon.
+</div>
 </body>
 </html>
