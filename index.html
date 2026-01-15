@@ -754,110 +754,110 @@
 
   <script>
  // Chatbot
-const chatToggleBtn = document.querySelector('.chat-toggle');   // the button
-const chatbotEl = document.getElementById('chatbot');           // the chat box
-const chatCloseBtn = document.getElementById('chatClose');      // close icon (must exist)
-const chatBody = document.getElementById('chatBody');
-const chatInput = document.getElementById('chatInput');
-const chatSend = document.getElementById('chatSend');
+document.addEventListener('DOMContentLoaded', () => {
+  // ELEMENTS
+  const chatToggleBtn = document.getElementById('chatToggle');
+  const chatbotEl     = document.getElementById('chatbot');
+  const chatCloseBtn  = document.getElementById('chatClose');
+  const chatBody      = document.getElementById('chatBody');
+  const chatInput     = document.getElementById('chatInput');
+  const chatSend      = document.getElementById('chatSend');
 
-function toggleChat(forceOpen){
-  const isActive = chatbotEl.classList.contains('active');
-  const shouldOpen = forceOpen === true || !isActive;
-
-  chatbotEl.classList.toggle('active', shouldOpen);
-  chatbotEl.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
-
-  if(shouldOpen){
-    setTimeout(() => chatInput.focus(), 150);
+  // SAFETY CHECK: if core elements are missing, stop
+  if (!chatToggleBtn || !chatbotEl || !chatBody || !chatInput || !chatSend) {
+    console.warn('Chat elements not found – check IDs.');
+    return;
   }
-}
 
-chatToggleBtn.addEventListener('click', () => toggleChat());
-if(chatCloseBtn){
-  chatCloseBtn.addEventListener('click', () => toggleChat(false));
-}
-
-function appendMessage(text, type){
-  const div = document.createElement('div');
-  div.className = 'message ' + type;
-  div.textContent = text;
-  chatBody.appendChild(div);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function getBotReply(msg){
-  const text = msg.toLowerCase();
-
-  if(text.includes('cheap') || text.includes('price') || text.includes('budget')){
-    return 'Asturias is our most budget-friendly hike 🌿—great views, low costs, and easy connections from major cities.';
-  } else if(text.includes('best') || text.includes('favorite') || text.includes('nature')){
-    return 'For pure nature, Asturias and Iceland are top picks ⛰—lush green valleys or wild volcanic landscapes.';
-  } else if(text.includes('book') || text.includes('reserve') || text.includes('start')){
-    return 'Use the “Plan Your Hike” form above to start your journey 🥾. We’ll email you a custom plan.';
-  } else if(text.includes('when') || text.includes('season')){
-    return 'Spring and early autumn are ideal for quieter trails and softer light in all three destinations 🍃';
-  } else {
-    return 'Please fill out the form, we will contact you as soon as possible.';
+  // OPEN/CLOSE CHAT
+  function toggleChat(forceOpen){
+    const isActive  = chatbotEl.classList.contains('active');
+    const shouldOpen = forceOpen === true || !isActive;
+    chatbotEl.classList.toggle('active', shouldOpen);
+    if (shouldOpen) {
+      setTimeout(() => chatInput.focus(), 150);
+    }
   }
-}
 
-function sendMessage(){
-  const value = chatInput.value.trim();
-  if(!value) return;
-
-  appendMessage(value, 'user');
-  const reply = getBotReply(value);
-
-  setTimeout(() => appendMessage(reply, 'bot'), 300);
-  chatInput.value = '';
-}
-
-chatSend.addEventListener('click', sendMessage);
-
-chatInput.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter'){
-    e.preventDefault();
-    sendMessage();
+  chatToggleBtn.addEventListener('click', () => toggleChat());
+  if (chatCloseBtn) {
+    chatCloseBtn.addEventListener('click', () => toggleChat(false));
   }
+
+  // MESSAGES
+  function appendMessage(text, type){
+    const div = document.createElement('div');
+    div.className = 'message ' + type;
+    div.textContent = text;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function getBotReply(msg){
+    const t = msg.toLowerCase();
+    if (t.includes('cheap') || t.includes('budget')) return 'Asturias is our most budget-friendly trip!';
+    if (t.includes('best') || t.includes('nature')) return 'Asturias and Iceland are top nature picks.';
+    if (t.includes('book')) return 'Use the form above to start your journey.';
+    return 'Please fill out the form and we will contact you soon.';
+  }
+
+  function sendMessage(){
+    const value = chatInput.value.trim();
+    if (!value) return;
+    appendMessage(value, 'user');
+    setTimeout(() => appendMessage(getBotReply(value), 'bot'), 300);
+    chatInput.value = '';
+  }
+
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // WHATSAPP FORM
+  const form = document.querySelector('.booking-form');
+  if (form) {
+    form.addEventListener('submit', sendToWhatsApp);
+  }
+
+  function sendToWhatsApp(event){
+    event.preventDefault();
+
+    const name     = document.getElementById('fullName')?.value || '';
+    const emailVal = document.getElementById('email')?.value || '';
+    const trip     = document.getElementById('adventure')?.value || '';
+    const dateFrom = document.getElementById('date')?.value || '';
+    const dateTo   = document.getElementById('date1')?.value || '';
+
+    const phone = '34604294900';
+
+    const msg =
+      `New Booking Request:%0A` +
+      `Name: ${name}%0A` +
+      `Email: ${emailVal}%0A` +
+      `Trip: ${trip}%0A` +
+      `From: ${dateFrom}%0A` +
+      `To: ${dateTo}`;
+
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+  }
+
+  // BACKGROUND SCROLL
+  window.addEventListener('scroll', () => {
+    const scroll = window.scrollY;
+    if (scroll < 400) {
+      document.body.style.backgroundImage =
+        "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')";
+    } else {
+      document.body.style.backgroundImage =
+        "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
+    }
+  });
 });
-function sendToWhatsApp(event){
-  event.preventDefault();
-
-  // Get form values
-  const name = document.querySelector('.booking-form input[type="text"]').value;
-  const email = document.querySelector('.booking-form input[type="email"]').value;
-  const trip = document.querySelector('.booking-form select').value;
-  const date = document.querySelector('.booking-form input[type="date"]').value;
- const date1 = document.querySelector('.booking-form input[type="date1"]').value;
-  // Your WhatsApp number (international format, no +)
-  const phone = "+34604294900"; // 
-
-  // Build message
-  const message =
-    `New Booking Request:%0A` +
-    `Name: ${name}%0A` +
-    `Email: ${email}%0A` +
-    `Trip: ${trip}%0A` +
-    `Date from: ${date}`+
-    `Date to: ${date1}``;
-
-  // Redirect to WhatsApp
-  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-}
-
-    window.addEventListener('scroll', () => {
-      const scroll = window.scrollY;
-      const body = document.body;
-if(scroll < 400){
-  body.style.backgroundImage =
-    "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://english-school-asturias.dukeseducation.es/wp-content/uploads/vivir-en-asturias-1024x614-1.jpg')";
-} else {
-  body.style.backgroundImage =
-    "linear-gradient(rgba(232,245,233,0.85),rgba(227,242,253,0.85)), url('https://lostinswitzerland.com/wp-content/uploads/2019/07/Oeschinensee14.jpg')";
-}
-    });
-  </script>
+</script>
 
 </body>
 </html>
